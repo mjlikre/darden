@@ -39,6 +39,15 @@ const UserSchema = new Schema({
   usertype:{
     type: String
 
+  },
+  place: {
+    type: String
+  },
+  lat: {
+    type: String
+  },
+  lng: {
+    type: String
   }
 
 });
@@ -68,6 +77,6 @@ UserSchema.methods.comparePassword = async function(candidatePassword, callback)
 };
 
 
-const NewUser = mongoose.model('NewUser', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
-module.exports = NewUser;
+module.exports = User;

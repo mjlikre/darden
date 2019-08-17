@@ -63,6 +63,10 @@ const Welcome = () => {
                   <br/>
                   <br/>
                   <button className="btn btn-primary"><Link to='/seekersignup'/>Sign up as a service seeker</button>
+                  <br/>
+                  <br/>
+                  <Link to='/signin'><button className="btn btn-primary">Sign in</button></Link>
+
               </div>
 
           </div>

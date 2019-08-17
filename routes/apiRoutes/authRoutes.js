@@ -7,6 +7,8 @@ const authMiddleware = require('./../../middlewares/authMiddlewares');
 
 
 // /api/auth/signup
+
+
 router.route('/signup')
   .post(authController.signUp);
 

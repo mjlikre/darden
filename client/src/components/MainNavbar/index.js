@@ -51,11 +51,12 @@ const index = () => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/logout">
+                            <Link className="nav-link naturalWHite" to="/signout">
                                 <i className="fa fa-id-badge" />
                                 Logout
                             </Link>
                         </li>
+
 
                     </ul>
                 </div>

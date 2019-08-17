@@ -1,3 +1,5 @@
 module.exports = {
-  NewUser: require('./User')
+  User: require('./User'),
+  UserProfile: require('./userProfile')
+
 };

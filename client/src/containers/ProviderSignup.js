@@ -4,10 +4,20 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { signup } from "../actions";
 import validator from 'validator';
+import { GoogleComponent } from 'react-google-location'
+import env from '../app_env'
 
 
+
+const API_KEY = env.GOOGLE_API_KEY // how to get key - step are below
 
 class ProviderSignup extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      place: null,
+    };
+  }
   renderErrors = ({ error, touched }) => {
     if(touched && error) {
       return (
@@ -31,11 +41,15 @@ class ProviderSignup extends Component {
 
   onSubmit = formProps => {
 
-    const data = {usertype: "provider", ...formProps}
+
+    const data = {usertype: "provider", ...formProps, lat: this.state.place.coordinates.lat, lng: this.state.place.coordinates.lng, place: this.state.place.place}
+    console.log(data)
+
     this.props.signup(data, () => {
       this.props.history.push('/hub');
     });
   }
+
 
   render() {
 
@@ -89,14 +103,16 @@ class ProviderSignup extends Component {
                         component={this.renderInput}
                         autoComplete='none'/>
                   </fieldset>
-                  <fieldset>
-                    <Field
-                        name='city'
-                        type='text'
-                        label='City'
-                        component={this.renderInput}
-                        autoComplete='none'/>
-                  </fieldset>
+                  <GoogleComponent
+
+                      apiKey={API_KEY}
+                      language={'en'}
+                      country={'country:in|country:us'}
+                      coordinates={true}
+                      locationBoxStyle={'custom-style'}
+                      locationListStyle={'custom-style-list'}
+                      onChange={(e) => { this.setState({ place: e }) }} />
+
                   <button className="btn btn-primary">Signup</button>
                 </form>
               </div>
@@ -143,3 +159,40 @@ export default compose(
   })
 )(ProviderSignup);
 
+
+
+
+
+
+
+
+
+// class HomeComponent extends Component {
+//   constructor(props) {
+//     super(props)
+//     this.state = {
+//       place: null,
+//     };
+//   }
+//
+//
+//   render() {
+//     return (
+//         <div >
+//           <GoogleComponent
+//
+//               apiKey={API_KEY}
+//               language={'en'}
+//               country={'country:in|country:us'}
+//               coordinates={true}
+//               locationBoxStyle={'custom-style'}
+//               locationListStyle={'custom-style-list'}
+//               onChange={(e) => { this.setState({ place: e }) }} />
+//         </div>
+//
+//     )
+//   }
+// }
+//
+//
+// export default HomeComponent;

@@ -1,4 +1,4 @@
-import { AUTH_USER, AUTH_ERROR, FETCH_USER, USER_ERROR } from "./types";
+import { AUTH_USER, AUTH_ERROR, FETCH_USER, USER_ERROR, USER_PROFILE, USER_PROFILE_ERROR } from "./types";
 import axios from 'axios';
 
 
@@ -36,6 +36,26 @@ export const fetchUser = () => async dispatch => {
     dispatch({ type: USER_ERROR, payload: 'Something bad happened' });
   }
 }
+export const makeUserProfile = data => async dispatch => {
+  console.log("hey, this is "+ data)
+  try {
+    await axios.post('/api/user/profile', data)
+    // const profile = await axios.post('/api/user/fetchprofile', data.id)
+    dispatch({ type: USER_PROFILE, payload: "profile"})
+  } catch(e){
+    dispatch({ type: USER_PROFILE_ERROR, payload: 'something is wrong'})
+  }
+
+}
+// export const getUserProfile = () => async dispatch => {
+//   try {
+//     await axios.post('/api/user/profile', data)
+//     dispatch({ type: FETCH_USER_PROFILE, payload: data})
+//   } catch(e) {
+//     dispatch({type: FETCH_USER_PROFILE_ERROR, payload: "error happened"})
+//   }
+//
+// }
 
 
 

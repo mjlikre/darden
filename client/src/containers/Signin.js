@@ -2,26 +2,27 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { signin } from "../actions";
-import { fetchUser } from "../actions";
+import { signin,fetchUser } from "../actions";
+
 
 
 class Signin extends Component {
     onSubmit = formValues => {
         this.props.signin(formValues, () => {
-            this.props.history.push("/dashboard");
+            this.props.fetchUser()
+
         });
         this.stateManage= 1
 
     };
 
 
-    componentDidMount() {
-      this.props.fetchUser();
-      if(this.props.user.user) {
-        this.props.history.push("/dashboard");
-      }
-    }
+    // componentDidMount() {
+    //   this.props.fetchUser();
+    //   if(this.props.user.user) {
+    //     this.props.history.push("/dashboard");
+    //   }
+    // }
 
     renderInput = ({ input, type }) => {
         return <input type={type} {...input} />;
