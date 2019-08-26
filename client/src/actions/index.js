@@ -40,8 +40,8 @@ export const makeUserProfile = data => async dispatch => {
   console.log("hey, this is "+ data)
   try {
     await axios.post('/api/user/profile', data)
-    // const profile = await axios.post('/api/user/fetchprofile', data.id)
-    dispatch({ type: USER_PROFILE, payload: "profile"})
+    const profile = await axios.post('/api/user/fetchprofile', data.id)
+    dispatch({ type: USER_PROFILE, payload: profile.data})
   } catch(e){
     dispatch({ type: USER_PROFILE_ERROR, payload: 'something is wrong'})
   }

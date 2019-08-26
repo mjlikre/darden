@@ -10,6 +10,8 @@ class Index extends Component {
         super(props);
         this.state = {
             currentJob: [],
+            aboutYou: '',
+            description: 0,
             skills: 0,
             interview: 0,
             agreement: 0
@@ -68,26 +70,23 @@ class Index extends Component {
     }
     setAgreement(){
         this.setState({agreement: 1})
-        const data = this.state.currentJob
+
+        const data = {
+                    id: this.props.user._id,
+                    firstname: this.props.user.firstname,
+                    lastname: this.props.user.lastname,
+                    phone: this.props.user.phone,
+                    address: this.props.user.place,
+                    email: this.props.user.email,
+                    lat: this.props.user.lat,
+                    lng: this.props.user.lng,
+                    skills: this.state.currentJob,
+                    agreement: this.state.agreement,
+                    aboutYou: this.state.aboutYou
+                }
         console.log(data)
         this.props.makeUserProfile(data)
     }
-    // composeUserData(){
-    //     const data = {
-    //         id: this.props.user._id,
-    //         firstname: this.props.firstname,
-    //         lastname: this.props.lastname,
-    //         phone: this.props.phone,
-    //         address: this.props.place,
-    //         email: this.props.email,
-    //         lat: this.props.lat,
-    //         lng: this.props.lng,
-    //         skills: this.state.currentJob
-    //         approved: false,
-    //     }
-    // }
-
-
 
     render() {
 
@@ -105,6 +104,7 @@ class Index extends Component {
                     </div>
                     <br/>
                     <br/>
+
                     <button className="btn btn-success" onClick={()=>{this.setSkill()}}>Next</button>
 
 

@@ -12,14 +12,16 @@ module.exports = {
   makeUserProfile: async (req, res) => {
     console.log('yo')
     console.log(req.body)
-    const skills = req.body;
-    console.log(skills)
+    const {id, firstname, lastname, phone, address, email, lat, lng, skills, approved } = req.body;
+
 
 
     try {
-      const userProfile = new db.UserProfile({skills});
+      const userProfile = new db.UserProfile( {id, firstname, lastname, phone, address, email, lat, lng, skills, approved
+      } );
       await userProfile.save();
     } catch(e) {
+      console.log(e)
       res.status(404).json({ e });
     }
   },
@@ -33,4 +35,5 @@ module.exports = {
     }
   }
 }
+
 

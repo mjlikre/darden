@@ -3,6 +3,8 @@ const authRoutes  = require('./authRoutes');
 // const userData = require('./userData')
 const userRoutes = require('./userRoutes')
 
+const matchRoutes = require('./matchRoutes')
+
 
 const passportService = require('./../../services/passport');
 
@@ -17,5 +19,7 @@ router.route('/test')
 router.use('/auth', authRoutes);
 // router.use('/data', userData)
 router.use('/user', userRoutes );
+
+router.use('/services', matchRoutes)
 
 module.exports = router;

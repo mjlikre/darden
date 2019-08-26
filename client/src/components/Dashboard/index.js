@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Navbar from '../MainNavbar'
+import ProviderNavbar from '../MainNavbar/providerNavbar'
+import SeekerNavbar from '../MainNavbar/seekerNavbar'
 import { fetchUser } from "../../actions";
 import { connect } from 'react-redux'
 
@@ -7,15 +8,24 @@ class Index extends Component {
     componentDidMount() {
         this.props.fetchUser()
     }
+
     render() {
-        console.log(this.props)
-        return (
+        if (this.props.user.usertype === 'provider'){
+            return (
 
-            <div>
-                <Navbar/>
+                <div>
+                    <ProviderNavbar/>
+                </div>
+            );
+        }
+        else if( this.props.user.usertype === 'seeker'){
+            return(
+                <div>
+                    <SeekerNavbar/>
+                </div>
+            )
+        }
 
-            </div>
-        );
     }
 }
 const mapStateToProps = (state) => ({

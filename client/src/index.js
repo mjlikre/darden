@@ -9,11 +9,12 @@ import reduxThunk from 'redux-thunk';
 import App from './containers/App';
 
 
-import Signup from './containers/ProviderSignup';
+import ProviderSignup from './containers/ProviderSignup';
 import Hub from './components/Hub'
 import Dashboard from './components/Dashboard'
 import Signout from './containers/Signout'
 import Signin from './containers/Signin'
+import SeekerSignup from "./containers/Signup"
 
 // Import components
 import Welcome from './components/Welcome';
@@ -38,7 +39,8 @@ ReactDOM.render(
     <Router>
       <App>
         <Route exact path='/' component={Welcome}/>
-        <Route exact path='/signup' component={Signup}/>
+        <Route exact path='/signup' component={ProviderSignup}/>
+        <Route exact path='/seekersignup' component={SeekerSignup}/>
         <Route exact path='/hub' component={Hub}/>
         <Route exact path='/dashboard' component={Dashboard}/>
         <Route exact path='/signout' component={Signout}/>

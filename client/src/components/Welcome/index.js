@@ -62,7 +62,7 @@ const Welcome = () => {
                   <Link to='/signup'><button className="btn btn-primary">Sign up as a service provider</button></Link>
                   <br/>
                   <br/>
-                  <button className="btn btn-primary"><Link to='/seekersignup'/>Sign up as a service seeker</button>
+                  <Link to='/seekersignup'><button className="btn btn-primary">Sign up as a service seeker</button></Link>
                   <br/>
                   <br/>
                   <Link to='/signin'><button className="btn btn-primary">Sign in</button></Link>
