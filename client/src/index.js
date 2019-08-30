@@ -11,10 +11,13 @@ import App from './containers/App';
 
 import ProviderSignup from './containers/ProviderSignup';
 import Hub from './components/Hub'
-import Dashboard from './components/Dashboard'
+import Dashboard from './containers/Dashboard'
 import Signout from './containers/Signout'
 import Signin from './containers/Signin'
 import SeekerSignup from "./containers/Signup"
+import Admin from './components/Admin'
+import booking from "./containers/booking"
+
 
 // Import components
 import Welcome from './components/Welcome';
@@ -45,6 +48,12 @@ ReactDOM.render(
         <Route exact path='/dashboard' component={Dashboard}/>
         <Route exact path='/signout' component={Signout}/>
         <Route exact path='/signin' component={Signin}/>
+        <Route exact path='/admin' component={Admin}/>
+        <Route exact path='/booking' component={booking}/>
+
+
+
+
 
       </App>
     </Router>

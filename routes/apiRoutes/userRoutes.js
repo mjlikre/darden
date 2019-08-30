@@ -10,10 +10,28 @@ router.route('/')
 
 router.route('/profile')
     .post(userController.makeUserProfile)
-    // .get(userController.getUserProfile)
+
 router.route("/fetchprofile")
     .get(userController.fetchUserProfile)
 
+
+router.route('/fetchprofiles')
+    .get(userController.fetchUserProfiles)
+
+router.route('/changestatusone')
+    .put(userController.changeStatusOne)
+
+router.route('/changestatustwo')
+    .put(userController.changeStatusTwo)
+
+router.route('/approve')
+    .put(userController.approve)
+
+router.route('/reject')
+    .put(userController.reject)
+
+router.route('/restart')
+    .put(userController.restart)
 
 
 

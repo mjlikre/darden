@@ -13,7 +13,7 @@ class Index extends Component {
             aboutYou: '',
             description: 0,
             skills: 0,
-            interview: 0,
+            status: 0,
             agreement: 0
         };
 
@@ -25,7 +25,7 @@ class Index extends Component {
 
     currentJob = []
     eachJob() {
-        const jobs =['Cleaning Services', 'Waiter', 'Dish Washer', 'Cook', 'Bartender', 'DJ', 'Photographer', 'Videographer', 'IT help', 'Ironing', 'Laundry', 'Baby Sitting', 'Pet Sitting', 'moving & assembly', 'Plumbing', 'Mechanic', 'Landscaping', 'Front Desk', 'Local Tour Guide', 'Medical Interpreter', 'Tailoring clothes', 'Just need someone to talk to', 'Product User feedback session', '0ther']
+        const jobs =['Cleaning Services', 'Waiter', 'Dish Washer', 'Cook', 'Bartender', 'DJ', 'Photographer', 'Videographer', 'IT help', 'Ironing', 'Laundry', 'Baby Sitting', 'Pet Sitting', 'moving & assembly', 'Plumbing', 'Mechanic', 'Landscaping', 'Front Desk', 'Local Tour Guide', 'Medical Interpreter', 'Tailoring clothes', 'Just need someone to talk to', 'Product User feedback session', 'Other']
 
         return jobs.map(job => {
             return(
@@ -66,7 +66,7 @@ class Index extends Component {
         this.setState({skills: 1});
     }
     setInterview(){
-        this.setState({interview: 1})
+        this.setState({status: 1})
     }
     setAgreement(){
         this.setState({agreement: 1})
@@ -82,6 +82,7 @@ class Index extends Component {
                     lng: this.props.user.lng,
                     skills: this.state.currentJob,
                     agreement: this.state.agreement,
+                    status: this.state.status,
                     aboutYou: this.state.aboutYou
                 }
         console.log(data)
@@ -90,7 +91,7 @@ class Index extends Component {
 
     render() {
 
-        if(this.state.skills=== 0 && this.state.agreement === 0 && this.state.interview === 0){
+        if(this.state.skills=== 0 && this.state.agreement === 0 && this.state.status === 0){
             return (
                 <div className='container'>
                     <div className='container'>
@@ -111,7 +112,7 @@ class Index extends Component {
                 </div>
             );
         }
-        else if(this.state.skills===1 && this.state.agreement === 0 && this.state.interview === 0){
+        else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 0){
             return(
                 <div>
                     <h5>Set up an interview!</h5>
@@ -121,7 +122,7 @@ class Index extends Component {
 
             )
         }
-        else if(this.state.skills===1 && this.state.agreement === 0 && this.state.interview === 1){
+        else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 1){
             return(
                 <div>
                     <button className="btn btn-success" onClick={()=>{this.setAgreement()}}>Accept Terms and conditions</button>

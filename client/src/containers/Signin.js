@@ -9,13 +9,10 @@ import { signin,fetchUser } from "../actions";
 class Signin extends Component {
     onSubmit = formValues => {
         this.props.signin(formValues, () => {
-            this.props.fetchUser()
-
+            this.props.fetchUser();
+            this.props.history.push("/dashboard");
         });
-        this.stateManage= 1
-
     };
-
 
     // componentDidMount() {
     //   this.props.fetchUser();
@@ -28,13 +25,10 @@ class Signin extends Component {
         return <input type={type} {...input} />;
     };
 
-    stateManage = 0
-
-
 
     render() {
         const { handleSubmit } = this.props;
-        console.log(this.props.user);
+
         // if (this.props.user === undefined){
         return (
             <div className="container mt-5">
@@ -86,7 +80,7 @@ function mapStateToProps(state) {
     return {
         errorMessage: state.auth.errorMessage,
         authenticated: state.auth.authenticated,
-        user: state.fetchUserReducer.user
+
 
     };
 }

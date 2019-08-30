@@ -30,11 +30,7 @@ const UserProfileSchema = new Schema({
   lng: {
     type: String
   },
-  approved: {
-    type: Number,
-    default: 0
-  },
-  agreement: {
+  status: {
     type: Number
   },
   skills: {
