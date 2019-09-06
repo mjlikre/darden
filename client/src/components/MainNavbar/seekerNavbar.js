@@ -1,60 +1,94 @@
-import React from "react";
-import { Link } from "react-router-dom";
-const providerNavbar = () => {
-    return (
-        <div>
-            <nav className="navbar navbar-dark bg-dark navbar-expand-lg shadow-sm">
-                <Link className="navbar-brand naturalWHite rounded p-2 " to="/">
-                    <i className="fa fa-home" /> Home
-                </Link>
-                <div className="collapse navbar-collapse float-right" id="navbarText">
-                    <ul className="nav nav-pills">
-                        <li className="nav-item">
-                            <Link
-                                className="nav-link float-right naturalWhite"
-                                to="/history"
-                            >
-                                <i className="fa fa-users" />
-                                History
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/dalendar">
-                                <i className="fa fa-id-badge" />
-                                Dalendar
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/payment">
-                                <i className="fa fa-id-badge" />
-                                Payment
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/setting">
-                                <i className="fa fa-id-badge" />
-                                Setting
-                            </Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/account">
-                                <i className="fa fa-id-badge" />
-                                Account
-                            </Link>
-                        </li>
+import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-                        <li className="nav-item">
-                            <Link className="nav-link naturalWHite" to="/signout">
-                                <i className="fa fa-id-badge" />
-                                Logout
-                            </Link>
-                        </li>
+class providerNavbar extends Component  {
+    constructor(props) {
+        super(props);
+        this.toggleMainNavbar = this.toggleMainNavbar.bind(this);
+        this.toggleAccountNavbar = this.toggleAccountNavbar.bind(this);
+        this.state = {
+            mainCollapsed: true,
+            accountCollapsed: true
+        };
+    }
+
+    toggleMainNavbar() {
+        this.setState({
+            mainCollapsed: !this.state.mainCollapsed
+        });
+    }
+    toggleAccountNavbar() {
+        this.setState({
+            accountCollapsed: !this.state.accountCollapsed
+        })
+    }
+    render(){
+        return (
+            <div>
+
+                <Navbar className='bg-dark navbar-dark' color="faded" light>
+                    <NavbarToggler onClick={this.toggleMainNavbar} className="mr-auto" />
+
+                    <NavbarBrand href="/" className="ml-auto mr-auto">DarDen</NavbarBrand>
+
+                    <NavbarToggler onClick={this.toggleAccountNavbar} className="ml-auto" > Accounts </NavbarToggler>
+
+                    <Collapse isOpen={!this.state.mainCollapsed} navbar>
+                        <div className='row'>
+                            <div className='col-md-4'>
+                                <Nav navbar>
+                                    <NavItem>
+                                        <NavLink href="/components/">Resources</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/dashboard">Dashboard</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/components/">Dalendar</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/components/">Reviews</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/components/">Equipment</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/components/">Projects</NavLink>
+                                    </NavItem>
 
 
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    );
+                                </Nav>
+                            </div>
+                        </div>
+                    </Collapse>
+                    <Collapse isOpen={!this.state.accountCollapsed} navbar>
+                        <div className='row text-right'>
+                            <div className='col-md-12'>
+                                <Nav navbar>
+                                    <NavItem>
+                                        <NavLink href="">Profile</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="">Account Info</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="">Payment</NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                        <NavLink href="/signout/">Signout</NavLink>
+                                    </NavItem>
+
+                                </Nav>
+                            </div>
+                        </div>
+                    </Collapse>
+                </Navbar>
+            </div>
+
+        )
+    }
+
+
 };
 export default providerNavbar;

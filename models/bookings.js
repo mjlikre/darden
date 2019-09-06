@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
 const BookingsSchema = new Schema({
-    user_id: {
+    clientId: {
         type: String,
         required: true,
         unique: true
@@ -11,17 +12,16 @@ const BookingsSchema = new Schema({
     service: {
         type: String
     },
-    location:{
+    place:{
         type: Object
     },
-    time:{
+    date:{
         type: String
     },
-    hours:{
+    hour:{
         type: Number
-
     },
-    wage: {
+    price: {
         type: Number
     },
     name: {
@@ -33,12 +33,25 @@ const BookingsSchema = new Schema({
     phone: {
         type: String
     },
-    provider_id: {
+    providerId: {
         type: String
     },
-    status: {
-        default: 0
+    confirm: {
+        type: Number
+    },
+    darden: {
+        type: Number
+    },
+    tax: {
+        type: Number
+    },
+    total: {
+        type: Number
+    },
+    description: {
+        type: String
     }
+
 
 });
 

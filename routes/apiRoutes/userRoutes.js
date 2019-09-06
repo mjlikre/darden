@@ -25,13 +25,11 @@ router.route('/changestatustwo')
     .put(userController.changeStatusTwo)
 
 router.route('/approve')
-    .put(userController.approve)
+    .post(userController.approve)
 
 router.route('/reject')
     .put(userController.reject)
 
-router.route('/restart')
-    .put(userController.restart)
 
 
 

@@ -7,6 +7,8 @@ import fetchUserReducer from "./fetchUserReducer";
 import profileReducer from "./profileReducer";
 import adminReducer from "./adminReducer";
 import statusChange from "./statusChange";
+import paymentReducer from "./paymentReducer";
+import dataReducer from "./dataReducer";
 
 export default combineReducers({
   auth,
@@ -14,6 +16,8 @@ export default combineReducers({
   profileReducer,
   adminReducer,
   statusChange,
+  paymentReducer,
+  dataReducer,
   form
 
 });

@@ -15,12 +15,14 @@ import {
   ADMIN_APPROVE_ERROR,
   ADMIN_REJECT,
   ADMIN_REJECT_ERROR,
-  ADMIN_RESTART,
-  ADMIN_RESTART_ERROR,
   MATCH,
   MATCH_ERROR,
   ADMIN,
-  ADMIN_ERROR
+  ADMIN_ERROR,
+  PAYMENT,
+  PAYMENT_ERROR,
+  BOOKING,
+  BOOKING_ERROR
 } from "./types";
 import axios from 'axios';
 
@@ -60,7 +62,6 @@ export const fetchUser = () => async dispatch => {
   }
 }
 export const makeUserProfile = data => async dispatch => {
-  console.log("hey, this is "+ data)
   try {
     await axios.post('/api/user/profile', data)
     const profile = await axios.post('/api/user/fetchprofile', data.id)
@@ -98,7 +99,7 @@ export const changeStatusTwo = data => async dispatch =>{
 }
 export const approved = data => async dispatch =>{
   try {
-    await axios.put('api/user/approve', data)
+    await axios.post('api/user/approve', data)
     dispatch({ type: ADMIN_APPROVE, payload : 'success'})
   }catch(e){
     dispatch({ type: ADMIN_APPROVE_ERROR, payload: "couldn't process request"})
@@ -112,14 +113,7 @@ export const rejected = data => async dispatch =>{
     dispatch({ type: ADMIN_REJECT_ERROR, payload: "couldn't process request"})
   }
 }
-export const restart = data => async dispatch =>{
-  try {
-    await axios.put('api/user/restart', data)
-    dispatch({ type: ADMIN_RESTART, payload : 'success'})
-  }catch(e){
-    dispatch({ type: ADMIN_RESTART_ERROR, payload: "couldn't process request"})
-  }
-}
+
 export const match = data => async dispatch =>{
   try{
     const matched = await axios.post('api/services/match', data)
@@ -136,6 +130,26 @@ export const adminSignIn = data => async dispatch =>{
     dispatch({ type: ADMIN, payload: admin})
   }catch(e){
     dispatch({ type: ADMIN_ERROR, payload: "not an admin"})
+  }
+}
+
+export const bookingPayment = data => async dispatch =>{
+  try{
+    const charge = await axios.post('api/payment', data)
+    dispatch({ type: PAYMENT, payload: charge.data})
+
+  }catch(e){
+    dispatch({ type: PAYMENT_ERROR, payload: e})
+  }
+}
+
+export const booking = data => async dispatch =>{
+  try{
+    const bookingForm = await axios.post("api/data", data)
+    console.log(bookingForm)
+    dispatch({ type: BOOKING, payload: bookingForm.data})
+  }catch(e){
+    dispatch({ type: BOOKING_ERROR, payload: "something went wrong fam"})
   }
 }
 

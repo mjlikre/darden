@@ -15,7 +15,7 @@ import Dashboard from './containers/Dashboard'
 import Signout from './containers/Signout'
 import Signin from './containers/Signin'
 import SeekerSignup from "./containers/Signup"
-import Admin from './components/Admin'
+import Admin from './containers/Admin'
 import booking from "./containers/booking"
 
 
@@ -50,10 +50,6 @@ ReactDOM.render(
         <Route exact path='/signin' component={Signin}/>
         <Route exact path='/admin' component={Admin}/>
         <Route exact path='/booking' component={booking}/>
-
-
-
-
 
       </App>
     </Router>

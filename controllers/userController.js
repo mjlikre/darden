@@ -11,10 +11,10 @@ module.exports = {
   },
   makeUserProfile: async (req, res) => {
     console.log(req.body)
-    const {id, firstname, lastname, phone, address, email, lat, lng, skills, status } = req.body;
+    const {id, firstname, lastname, phone, address, email, lat, lng, skills, status, date } = req.body;
 
     try {
-      const userProfile = new db.UserProfile( {id, firstname, lastname, phone, address, email, lat, lng, skills, status
+      const userProfile = new db.UserProfile( {id, firstname, lastname, phone, address, email, lat, lng, skills, status, date
       } );
       await userProfile.save();
     } catch(e) {
@@ -66,34 +66,22 @@ module.exports = {
     }
   },
   approve: async (req, res) =>{
-    try{
-      console.log(req.body)
-      await db.UserProfile.updateOne(
-          { id : req.body.id},
-          { $set: { status : 4}}
-      );
-    }catch (e){
-      await res.json(e)
+    console.log(req.body)
+    const {id, firstname, lastname, phone, email, lat, lng, skills, address } = req.body;
+
+    try {
+      const userProfile = new db.ApprovedUserProfile( {id, firstname, lastname, phone, email, lat, lng, skills, address });
+      await userProfile.save();
+      await db.UserProfile.remove({id: req.body.id})
+    } catch(e) {
+      console.log(e)
+      res.status(404).json({ e });
     }
   },
   reject: async (req, res) =>{
     try{
       console.log(req.body)
-      await db.UserProfile.updateOne(
-          { id : req.body.id},
-          { $set: { status : 0}}
-      );
-    }catch (e){
-      await res.json(e)
-    }
-  },
-  restart: async (req, res) =>{
-    try{
-      console.log(req.body)
-      await db.UserProfile.updateOne(
-          { id : req.body.id},
-          { $set: { status : 1}}
-      );
+      await db.UserProfile.deleteOne({id: req.body.id})
     }catch (e){
       await res.json(e)
     }

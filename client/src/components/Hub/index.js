@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-// import {Link} from "react-router-dom";
 import { connect } from "react-redux";
-
+import DateTimePicker from 'react-datetime-picker';
 import { fetchUser, makeUserProfile } from "../../actions";
 import { Redirect } from "react-router-dom";
 
@@ -14,12 +13,16 @@ class Index extends Component {
             description: 0,
             skills: 0,
             status: 0,
-            agreement: 0
+            agreement: 0,
+            date: null
         };
 
     }
     componentDidMount() {
         this.props.fetchUser()
+    }
+    onChange = date => {
+        this.setState({ date })
     }
 
 
@@ -50,7 +53,7 @@ class Index extends Component {
     displayMySkills (){
         return this.state.currentJob.map(job=>{
             return(
-                <p key = {job}>{job}<button key = {job} onClick ={()=>{this.updateSkills({job})}} className="btn btn-primary">delete</button></p>
+                <p key = {job}><button key = {job} onClick ={()=>{this.updateSkills({job})}} className="btn btn-outline-danger">X</button>  {job}</p>
             )
         })
     }
@@ -83,7 +86,8 @@ class Index extends Component {
                     skills: this.state.currentJob,
                     agreement: this.state.agreement,
                     status: this.state.status,
-                    aboutYou: this.state.aboutYou
+                    aboutYou: this.state.aboutYou,
+                    date: this.state.date
                 }
         console.log(data)
         this.props.makeUserProfile(data)
@@ -105,6 +109,21 @@ class Index extends Component {
                     </div>
                     <br/>
                     <br/>
+                    <div className='container'>
+                        <form action="">
+                                <label >
+                                    About You
+                                    <textarea
+                                        className="form-control"
+                                        rows='3'
+                                        value = {this.state.aboutYou}
+                                        onChange={(e) => { this.setState({ aboutYou: e.target.value })}}
+
+                                    />
+                                </label>
+
+                        </form>
+                    </div>
 
                     <button className="btn btn-success" onClick={()=>{this.setSkill()}}>Next</button>
 
@@ -114,8 +133,12 @@ class Index extends Component {
         }
         else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 0){
             return(
-                <div>
+                <div className='container'>
                     <h5>Set up an interview!</h5>
+                    <DateTimePicker
+                        onChange={this.onChange}
+                        value={this.state.date}
+                    />
                     <br/>
                     <button className="btn btn-success" onClick={()=>{this.setInterview()}}>Next</button>
                 </div>
@@ -124,7 +147,7 @@ class Index extends Component {
         }
         else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 1){
             return(
-                <div>
+                <div className='container'>
                     <button className="btn btn-success" onClick={()=>{this.setAgreement()}}>Accept Terms and conditions</button>
                 </div>
             )

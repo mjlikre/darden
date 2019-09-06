@@ -5,6 +5,9 @@ const cors      = require('cors');
 
 const app = express();
 
+app.use(require("body-parser").text());
+
+
 // Database setupx
 mongoose.connect('mongodb://localhost:auth/auth', { useNewUrlParser: true, useCreateIndex: true});
 

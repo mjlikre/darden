@@ -16,11 +16,18 @@ export const ADMIN_APPROVE_ERROR = "ADMIN_APPROVE_ERROR";
 export const ADMIN_REJECT = "ADMIN_REJECT";
 export const ADMIN_REJECT_ERROR = "ADMIN_REJECT_ERROR";
 export const ADMIN_RESTART = "ADMIN_RESTART";
-export const ADMIN_RESTART_ERROR = "ADMIN_RESTART_ERROR"
+export const ADMIN_RESTART_ERROR = "ADMIN_RESTART_ERROR";
 export const MATCH = 'MATCH';
-export const MATCH_ERROR = "MATCH_ERROR"
+export const MATCH_ERROR = "MATCH_ERROR";
 export const ADMIN = "ADMIN";
-export const ADMIN_ERROR = "ADMIN_ERROR"
+export const ADMIN_ERROR = "ADMIN_ERROR";
+export const PAYMENT = "PAYMENT";
+export const PAYMENT_ERROR = "PAYMENT_ERROR";
+export const BOOKING = "BOOKING";
+export const BOOKING_ERROR = "BOOKING_ERROR";
+
+
+
 
 
 

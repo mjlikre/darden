@@ -9,6 +9,8 @@ const bookingRoutes = require('./bookingRoutes')
 
 const adminRoutes = require('./adminRoutes')
 
+const paymentRoutes = require('./paymentRoute')
+
 
 const passportService = require('./../../services/passport');
 
@@ -26,8 +28,9 @@ router.use('/user', userRoutes );
 
 router.use('/services', matchRoutes);
 
-router.use('/data', bookingRoutes)
+router.use('/data', bookingRoutes);
 
-router.use('/admin', adminRoutes)
+router.use('/admin', adminRoutes);
 
+router.use('/payment', paymentRoutes);
 module.exports = router;

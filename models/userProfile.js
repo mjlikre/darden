@@ -8,6 +8,9 @@ const UserProfileSchema = new Schema({
     required: true,
     unique: true
   },
+  email:{
+    type: String
+  },
   firstname: {
     type: String
   },
@@ -17,11 +20,7 @@ const UserProfileSchema = new Schema({
   phone:{
     type: String
   },
-  usertype:{
-    type: String
-
-  },
-  place: {
+  address: {
     type: String
   },
   lat: {
@@ -39,6 +38,9 @@ const UserProfileSchema = new Schema({
   availability: {
     type: Number,
     default: 0
+  },
+  date: {
+    type: String
   }
 
 });
