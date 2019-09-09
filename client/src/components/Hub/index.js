@@ -3,6 +3,15 @@ import { connect } from "react-redux";
 import DateTimePicker from 'react-datetime-picker';
 import { fetchUser, makeUserProfile } from "../../actions";
 import { Redirect } from "react-router-dom";
+import waiter from "../../images/waiter.png"
+import pet from "../../images/pet.png"
+import cleaning from "../../images/cleaning.png"
+import mental from "../../images/mental.png"
+import laundry from "../../images/laundry.png"
+import personalTrainer from "../../images/personalTrainer.png"
+import dishwasher from "../../images/dishwasher.png"
+import babysitting from "../../images/babysitting.png"
+import moving from "../../images/moving.png"
 
 class Index extends Component {
     constructor(props) {
@@ -14,9 +23,9 @@ class Index extends Component {
             skills: 0,
             status: 0,
             agreement: 0,
-            date: null
+            date: null,
+            justSkills: [],
         };
-
     }
     componentDidMount() {
         this.props.fetchUser()
@@ -24,36 +33,32 @@ class Index extends Component {
     onChange = date => {
         this.setState({ date })
     }
-
-
     currentJob = []
-    eachJob() {
-        const jobs =['Cleaning Services', 'Waiter', 'Dish Washer', 'Cook', 'Bartender', 'DJ', 'Photographer', 'Videographer', 'IT help', 'Ironing', 'Laundry', 'Baby Sitting', 'Pet Sitting', 'moving & assembly', 'Plumbing', 'Mechanic', 'Landscaping', 'Front Desk', 'Local Tour Guide', 'Medical Interpreter', 'Tailoring clothes', 'Just need someone to talk to', 'Product User feedback session', 'Other']
-
-        return jobs.map(job => {
-            return(
-                <button onClick={()=>{this.mySkills({job})}} key = {job} className="btn btn-primary">{job}</button>
-            )
-        })
-
+    currentSkill = []
+    height = {
+        height: "174.66px"
     }
     mySkills=(e)=>{
-        if(this.currentJob.length < 5 ){
-            this.currentJob.push(e.job)
+        if(this.currentJob.length < 3 ){
+            this.currentJob.push(e)
+            this.currentSkill.push(e.skillName)
             this.setState({currentJob: this.currentJob})
-
+            this.setState({justSkills: this.currentSkill})
         }else{
             alert("You've entered the maximum number of skills, delete some if you want to add more")
         }
-
-
-
         console.log(this.state)
     }
     displayMySkills (){
+        console.log({cleaning, waiter, dishwasher, laundry, babysitting, pet, personalTrainer, moving, mental})
         return this.state.currentJob.map(job=>{
             return(
-                <p key = {job}><button key = {job} onClick ={()=>{this.updateSkills({job})}} className="btn btn-outline-danger">X</button>  {job}</p>
+                <div className='col-md-4 container'>
+                    <div className='card'>
+                        <img style={this.height} className='card-img-top' src={job.img} alt=""/>
+                    </div>
+                    <p key = {job}><button key = {job} onClick ={()=>{this.updateSkills({job})}} className="btn btn-outline-danger">X</button>  {job.skillName}</p>
+                </div>
             )
         })
     }
@@ -73,7 +78,6 @@ class Index extends Component {
     }
     setAgreement(){
         this.setState({agreement: 1})
-
         const data = {
                     id: this.props.user._id,
                     firstname: this.props.user.firstname,
@@ -83,66 +87,156 @@ class Index extends Component {
                     email: this.props.user.email,
                     lat: this.props.user.lat,
                     lng: this.props.user.lng,
-                    skills: this.state.currentJob,
+                    skills: this.state.justSkills,
                     agreement: this.state.agreement,
                     status: this.state.status,
                     aboutYou: this.state.aboutYou,
-                    date: this.state.date
+                    date: this.state.date,
                 }
         console.log(data)
         this.props.makeUserProfile(data)
     }
-
     render() {
-
+        const length = {
+            width: '450px'
+        }
+        const height = {
+            height: "174.66px"
+        }
         if(this.state.skills=== 0 && this.state.agreement === 0 && this.state.status === 0){
             return (
                 <div className='container'>
                     <div className='container'>
                         <h1>Welcome, {this.props.user.firstname}</h1>
-                        <h4>Your Skills:</h4>
-                        {this.displayMySkills()}
-
                         <br/>
-                        <h4>Select Your Skills</h4>
-                        {this.eachJob()}
+                        <h2 className='ml-auto'>Select Your Skills:</h2>
+                        <div className='row'>
+                            <div className='col-md-8'>
+                                <div className='row'>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills( {skillName: "Cleaning", img: "/static/media/cleaning.f15b51f4.png"})}}>
+                                            <img style={height} className='card-img-top' src={cleaning} alt=""/>
+                                        </div>
+                                        <h4>Cleaning</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Waiter", img: '/static/media/waiter.c926a04c.png'})}}>
+                                            <img style={height} className='card-img-top' src={waiter} alt=""/>
+                                        </div>
+                                        <h4>Waiter</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "DishWasher", img: "/static/media/dishwasher.9132659f.png"})}}>
+                                            <img style={height} className='card-img-top' src={dishwasher} alt=""/>
+                                        </div>
+                                        <h4>DishWasher</h4>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div className='row'>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Laundry", img: "/static/media/laundry.6f097540.png"})}}>
+                                            <img style={height} className='card-img-top' src={laundry} alt=""/>
+                                        </div>
+                                        <h4>Laundry</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Baby Sitting", img: "/static/media/babysitting.ffb982a2.png"})}}>
+                                            <img className='card-img-top' src={babysitting} alt=""/>
+                                        </div>
+                                        <h4>Baby Sitting</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Pet Sitting", img: "/static/media/pet.4013a9b6.png"})}}>
+                                            <img style={height} className='card-img-top' src={pet} alt=""/>
+                                        </div>
+                                        <h4>Pet Sitting</h4>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div className='row'>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Moving & Assembly", img: "/static/media/moving.27e02986.png"})}}>
+                                            <img style={height} className='card-img-top' src={moving} alt=""/>
+                                        </div>
+                                        <h4>Moving & Assembly</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Personal Trainer", img: "/static/media/personalTrainer.4f8096f0.png"})}}>
+                                            <img style={height} className='card-img-top' src={personalTrainer} alt=""/>
+                                        </div>
+                                        <h4>Personal Trainer</h4>
+                                    </div>
+                                    <div className='col-md-4 container'>
+                                        <div className='card' onClick={()=>{this.mySkills({skillName: "Mental Health Drama Airout", img: "/static/media/mental.e3d4af1a.png"})}}>
+                                            <img style={height} className='card-img-top' src={mental} alt=""/>
+                                        </div>
+                                        <h4>Mental Health Drama Airout</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h2>Your Skills:</h2>
+                        <div className='row'>
+                            <div className='col-md-8'>
+                                <div className='row'>
+                                    {this.displayMySkills()}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <br/>
                     <br/>
                     <div className='container'>
                         <form action="">
-                                <label >
-                                    About You
-                                    <textarea
-                                        className="form-control"
-                                        rows='3'
-                                        value = {this.state.aboutYou}
-                                        onChange={(e) => { this.setState({ aboutYou: e.target.value })}}
-
-                                    />
-                                </label>
-
+                            <label >
+                                <h3>Upload an Image Of Yourself</h3>
+                                <input
+                                    type="file"
+                                    className="form-control-file"
+                                    onChange={(e) => { this.setState({profileImg: e.target.value})}}
+                                />
+                            </label>
+                            <br/>
+                            <br/>
+                            <label >
+                                <h3>About You</h3>
+                                <textarea
+                                    placeholder='Write a little bit about yourself'
+                                    style = {length}
+                                    className="form-control"
+                                    rows='3'
+                                    value = {this.state.aboutYou}
+                                    onChange={(e) => { this.setState({ aboutYou: e.target.value })}}
+                                />
+                            </label>
                         </form>
                     </div>
-
                     <button className="btn btn-success" onClick={()=>{this.setSkill()}}>Next</button>
-
-
                 </div>
             );
         }
         else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 0){
             return(
                 <div className='container'>
+                    <br/>
+                    <br/>
                     <h5>Set up an interview!</h5>
-                    <DateTimePicker
-                        onChange={this.onChange}
-                        value={this.state.date}
-                    />
+                    <br/>
+                    <br/>
+                    <div className='container'>
+                        <DateTimePicker
+                            onChange={this.onChange}
+                            value={this.state.date}
+                        />
+                    </div>
+
                     <br/>
                     <button className="btn btn-success" onClick={()=>{this.setInterview()}}>Next</button>
                 </div>
-
             )
         }
         else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 1){
@@ -157,10 +251,9 @@ class Index extends Component {
                 <Redirect to='/dashboard'/>
             )
         }
-
-
     }
 }
+
 const mapStateToProps = (state) => ({
     user: state.fetchUserReducer.user
 })

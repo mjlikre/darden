@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { getUserProfiles, changeStatusOne, changeStatusTwo, approved, rejected, fetchUser, adminSignIn, signout} from '../actions'
 import { connect } from "react-redux";
 import {Link} from "react-router-dom";
+import moment from 'moment'
+
 
 class Index extends Component {
 
@@ -99,7 +101,7 @@ class Index extends Component {
     profileInfo(e){
         console.log(e)
         alert(
-            "Name: "+e.firstname + " " + e.lastname + "\n"  + "Skills: "+e.skills + "\n" + "Location: "+e.address + "\n" + "Interview Date: " + e.date
+            "Name: "+e.firstname + " " + e.lastname + "\n"  + "Skills: "+e.skills + "\n" + "Location: "+e.address + "\n" + "Interview Date: " + moment(e.date).format("dddd, MMMM Do YYYY, h:mm:ss a")
         )
     }
 

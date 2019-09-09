@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMaps from "../GoogleMaps"
 import moment from 'moment'
 import StripeCheckout from "react-stripe-checkout";
-import { bookingPayment, booking } from "../../actions"
+import { bookingPayment, booking, match } from "../../actions"
 import {connect} from "react-redux"
 import {toast} from "react-toastify"
 import 'react-toastify/dist/ReactToastify.min.css'
@@ -19,6 +19,7 @@ toast.configure({
 
 class Index extends Component {
     bookingInfo = this.props.bookingInfo
+
 
     paymentAmount = {
         darden : (this.bookingInfo.price*0.1).toFixed(2),
@@ -42,11 +43,11 @@ class Index extends Component {
             ...this.bookingInfo,
             darden : (this.bookingInfo.price*0.1).toFixed(2),
             tax: (this.bookingInfo.price*0.15).toFixed(2),
-            total: ((this.bookingInfo.price*0.1) + (this.bookingInfo.price) + (this.bookingInfo.price*0.15)).toFixed(2),
-            stripe: this.props.status
+            total: ((this.bookingInfo.price*0.1) + (this.bookingInfo.price) + (this.bookingInfo.price*0.15)).toFixed(2)
         }
         console.log(data)
         this.props.booking(data)
+        this.props.match(data)
     }
 
 
@@ -74,14 +75,13 @@ class Index extends Component {
                     <Redirect to='/dashboard'/>
                 )
             }else {
-                toast("Something went and we charged you! (p.s. Don't worry we'll refund you)",
+                toast("Something went and we charged you! (p.s. Don't worry we'll refund you ASAP)",
                     {type: 'error'})
             }
         }
 
         return(
             <div className='jumbotron'>
-                {/*<ToastContainer />*/}
                 <div className='row'>
                     <div className='col-md-7 card'>
                         <br/>
@@ -168,4 +168,4 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps, {bookingPayment, booking})(Index);
+export default connect(mapStateToProps, {bookingPayment, booking, match})(Index);

@@ -50,6 +50,9 @@ const BookingsSchema = new Schema({
     },
     description: {
         type: String
+    },
+    bookingId:{
+        type: String
     }
 
 

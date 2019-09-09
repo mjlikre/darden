@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
 import DateTimePicker from 'react-datetime-picker';
-import logo from "./../images/logo1.png"
 import {connect} from "react-redux"
 import {GoogleComponent} from "react-google-location";
 import Confirmation from './../components/Confirmation'
 import { fetchUser } from "../actions";
 import env from '../app_env'
-
-
-
+import waiter from "./../images/waiter.png"
+import pet from "./../images/pet.png"
+import cleaning from "./../images/cleaning.png"
+import mental from "./../images/mental.png"
+import laundry from "./../images/laundry.png"
+import personalTrainer from "./../images/personalTrainer.png"
+import dishwasher from "./../images/dishwasher.png"
+import babysitting from "./../images/babysitting.png"
+import moving from "./../images/moving.png"
+import uuid from "uuid"
 const API_KEY = env.GOOGLE_API_KEY // how to get key - step are below
 
 
@@ -17,22 +23,31 @@ class Booking extends Component {
         super(props)
         this.state = {
             date: null,
-            service: '',
+            service: null,
             place: '',
             hour: '',
             name: '',
             email: '',
-            phone: '',
+            phone: '+1',
             description: '',
-            confirm: 0
+            confirm: 2
 
         };
-        this.handleChange = this.handleChange.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         this.props.fetchUser()
+    }
+    imgWidth = {
+        height: "174.66px"
+    }
+    imgHeight = {
+        height: "230px",
+        width: "230px"
+    }
+    topImg = {
+        width: '174.66px'
     }
 
 
@@ -40,19 +55,45 @@ class Booking extends Component {
         this.setState({ date })
     }
 
-    handleChange(event) {
-        this.setState({service: event.target.value});
+    selectSkill(){
+        if(this.state.service){
+            return(
+                <div>
+                    <div className='card' >
+                        <img style={this.imgHeight} className='card-img-top' src={this.state.service.img} alt=""/>
+                        <h4>{this.state.service.skillName}</h4>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <button className='btn btn-success' onClick={()=>{this.setState({confirm: 0})}}>Proceed</button>
+
+                </div>
+
+            )
+        }
+
     }
 
-    data = {}
+
+
 
 
     handleSubmit(e){
         e.preventDefault()
         this.data = {
-            ...this.state,
+            date: this.state.date,
+            service: this.state.service.skillName,
+            place: this.state.place,
+            hour: this.state.hour,
+            name: this.state.name,
+            email: this.state.email,
+            phone: this.state.phone,
+            description: this.state.description,
+            confirm: this.state.confirm,
             clientId: this.props.user._id,
-            price: this.state.hour * 16
+            price: this.state.hour * 16,
+            bookingId: uuid()
         }
 
         this.setState({confirm: 1})
@@ -62,15 +103,117 @@ class Booking extends Component {
     
 
     render() {
+        if (this.state.confirm === 2){
+            return (
+                <div className='container' >
 
-        const imgWidth = {
-            width: "30rem"
+                    <div className='row'>
+
+
+                        <div className='col-md-8'>
+                            <h2 className='ml-auto'>Select A Service:</h2>
+                            <br/>
+                            <br/>
+                            <div className='row'>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Cleaning", img: '/static/media/cleaning.f15b51f4.png'}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={cleaning} alt=""/>
+                                    </div>
+                                    <h4>Cleaning</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Waiter", img: '/static/media/waiter.c926a04c.png'}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={waiter} alt=""/>
+                                    </div>
+                                    <h4>Waiter</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "DishWasher", img: "/static/media/dishwasher.9132659f.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={dishwasher} alt=""/>
+                                    </div>
+                                    <h4>DishWasher</h4>
+
+                                </div>
+                            </div>
+                            <br/>
+                            <div className='row'>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Laundry", img: "/static/media/laundry.6f097540.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={laundry} alt=""/>
+                                    </div>
+                                    <h4>Laundry</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Baby Sitting", img: "/static/media/babysitting.ffb982a2.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={babysitting} alt=""/>
+                                    </div>
+                                    <h4>Baby Sitting</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Pet Sitting", img: "/static/media/pet.4013a9b6.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={pet} alt=""/>
+                                    </div>
+                                    <h4>Pet Sitting</h4>
+
+                                </div>
+                            </div>
+                            <br/>
+                            <div className='row'>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Moving & Assembly", img: "/static/media/moving.27e02986.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={moving} alt=""/>
+                                    </div>
+                                    <h4>Moving & Assembly</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Personal Trainer", img: "/static/media/personalTrainer.4f8096f0.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={personalTrainer} alt=""/>
+                                    </div>
+                                    <h4>Personal Trainer</h4>
+
+                                </div>
+                                <div className='col-md-4 container'>
+                                    <div className='card' onClick={()=>{this.setState( {service: {skillName: "Mental Health Drama Airout", img: "/static/media/mental.e3d4af1a.png"}})}}>
+                                        <img style={this.imgWidth} className='card-img-top' src={mental} alt=""/>
+                                    </div>
+                                    <h4>Mental Health Drama Airout</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col-md-4 container'>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+
+
+
+                            {this.selectSkill()}
+                        </div>
+                    </div>
+                </div>
+            )
         }
         if (this.state.confirm === 0){
             return (
                 <div className='container '>
                     <div className='text-center' >
-                        <img className="card-img-top" src={logo} alt = '' style={imgWidth}/>
+                        <img className="card-img-top" src={this.state.service.img} alt = '' style={this.topImg}/>
+                        <h3>{this.state.service.skillName}</h3>
 
                     </div>
                     <div className='row text-center'>
@@ -79,39 +222,7 @@ class Booking extends Component {
                         </div>
                         <div className='col-md-6 jumbotron'>
                             <form>
-                                <label>
-                                    <p>Choose the service you need</p>
 
-                                    <select value={this.state.service} onChange={this.handleChange}>
-                                        <option value="None">Choose A Service</option>
-                                        <option value="Cleaning Services">Cleaning Services</option>
-                                        <option value="Waiter">Waiter</option>
-                                        <option value="Dish Washer">Dish Washer</option>
-                                        <option value="Cook">Cook</option>
-                                        <option value="Bartender">Bartender</option>
-                                        <option value="DJ">DJ</option>
-                                        <option value="Photographer">Photographer</option>
-                                        <option value="Videographer">Videographer</option>
-                                        <option value="IT help">IT help</option>
-                                        <option value="Ironing">Ironing</option>
-                                        <option value="Laundry">Laundry</option>
-                                        <option value="Baby Sitting">Baby Sitting</option>
-                                        <option value="Pet Sitting">Pet Sitting</option>
-                                        <option value="Moving & Assembly">Moving & Assembly</option>
-                                        <option value="Plumbing">Plumbing</option>
-                                        <option value="Mechanic">Mechanic</option>
-                                        <option value="Landscaping">Landscaping</option>
-                                        <option value="Front Desk">Front Desk</option>
-                                        <option value="Local Tour Guide">Local Tour Guide</option>
-                                        <option value="Medical Interpreter">Medical Interpreter</option>
-                                        <option value="Tailoring clothes">Tailoring clothes</option>
-                                        <option value="Just need someone to talk to">Just need someone to talk to</option>
-                                        <option value="Product User feedback session">Product User feedback session</option>
-                                        <option value="Other">Other</option>
-
-                                    </select>
-                                </label>
-                                <br/>
                                 <label>
                                     <p>What's Your Location?</p>
                                     <GoogleComponent
@@ -189,7 +300,7 @@ class Booking extends Component {
 
                                     <input
                                         className="form-control"
-                                        placeholder='Phone'
+                                        placeholder='+1 123 456 7890'
                                         type="text"
                                         value={this.state.phone}
                                         onChange={(e) => { this.setState({ phone: e.target.value }) }}
