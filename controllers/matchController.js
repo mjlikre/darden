@@ -4,7 +4,22 @@ module.exports = {
     getMatch : async (req, res) =>{
         console.log(req.body)
         try {
+            const firstMatch = await db.ApprovedUserProfile.find({'lat' : req.body.place.coordinates.lat, 'lng' : req.body.place.coordinates.lng}) //need to figure out how to match with people within 0.0050 longitude and latitude,
+            let matched = []
 
+            firstMatch.map(users=>{
+                users.skills.map(skill=>{
+                    if(skill === req.body.service){
+                        if (matched.length < 3){
+                            matched.push(users)
+                        }
+
+                    }
+                })
+            })
+            await matched.map(match=>{
+
+            })
             await res.json({ matched });
         } catch (e) {
             await res.json(e)

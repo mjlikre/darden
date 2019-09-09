@@ -81,8 +81,6 @@ class Welcome extends Component {
                             <br/>
                             <br/>
                             <br/>
-
-
                             <div className='card jumbotron text-md-left'>
                                 <h1>Or Just Sign In</h1>
                                 <div id="first">

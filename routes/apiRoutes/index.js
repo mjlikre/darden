@@ -11,6 +11,7 @@ const adminRoutes = require('./adminRoutes')
 
 const paymentRoutes = require('./paymentRoute')
 
+const smsRoutes = require('./smsRoutes')
 
 const passportService = require('./../../services/passport');
 
@@ -33,4 +34,6 @@ router.use('/data', bookingRoutes);
 router.use('/admin', adminRoutes);
 
 router.use('/payment', paymentRoutes);
+
+router.use('/sms', smsRoutes)
 module.exports = router;

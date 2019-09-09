@@ -47,7 +47,6 @@ class Index extends Component {
         }
         console.log(data)
         this.props.booking(data)
-        this.props.match(data)
     }
 
 

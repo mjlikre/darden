@@ -3,6 +3,8 @@ const morgan    = require('morgan');
 const mongoose  = require('mongoose');
 const cors      = require('cors');
 
+
+
 const app = express();
 
 app.use(require("body-parser").text());
@@ -26,6 +28,9 @@ if(process.env.NODE_ENV === 'production') {
 // Routes setup
 const routes = require('./routes');
 app.use(routes);
+
+
+
 
 const PORT = process.env.PORT || 3001;
 

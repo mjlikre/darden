@@ -97,6 +97,7 @@ class Index extends Component {
         this.props.makeUserProfile(data)
     }
     render() {
+        console.log(this.props.user)
         const length = {
             width: '450px'
         }

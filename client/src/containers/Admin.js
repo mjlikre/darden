@@ -64,7 +64,7 @@ class Index extends Component {
         }
         console.log(e)
         this.props.approved(data)
-        window.location.reload(false);
+        // window.location.reload(false);
     }
 
     reject (e) {
