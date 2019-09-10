@@ -14,6 +14,9 @@ import dishwasher from "./../images/dishwasher.png"
 import babysitting from "./../images/babysitting.png"
 import moving from "./../images/moving.png"
 import uuid from "uuid"
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY // how to get key - step are below
 
 

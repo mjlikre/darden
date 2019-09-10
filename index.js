@@ -7,7 +7,10 @@ const cors      = require('cors');
 
 const app = express();
 
-
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+console.log(process.env.secret)
 
 // Database setupx
 mongoose.connect('mongodb://localhost:auth/auth', { useNewUrlParser: true, useCreateIndex: true});

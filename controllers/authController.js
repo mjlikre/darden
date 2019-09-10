@@ -1,5 +1,8 @@
 const db      = require('./../models');
 const jwt     = require('jwt-simple');
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const tokenForUser = function(user) {
   const timestamp = new Date().getTime();
@@ -7,7 +10,7 @@ const tokenForUser = function(user) {
   // iat === issued at time
 
   // Its going to encode the whole 1st object and then add our secret to it
-  return jwt.encode({ sub: user.id, iat: timestamp}, process.env.secret);
+  return jwt.encode({ sub: user.id, iat: timestamp}, process.env.SECRET_KEY);
 };
 
 

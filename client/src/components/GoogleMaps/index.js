@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
 
 export class MapContainer extends Component {
     displayMarkers = () => {

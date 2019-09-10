@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { signup } from "../actions";
 import validator from 'validator';
 import { GoogleComponent } from 'react-google-location'
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY // how to get key - step are below
 
