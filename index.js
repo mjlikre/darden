@@ -7,7 +7,6 @@ const cors      = require('cors');
 
 const app = express();
 
-app.use(require("body-parser").text());
 
 
 // Database setupx
