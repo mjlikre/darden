@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 console.log(process.env.secret)
 
 // Database setupx
-mongoose.connect('mongodb://localhost:auth/auth', { useNewUrlParser: true, useCreateIndex: true});
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost:auth/auth', { useNewUrlParser: true, useCreateIndex: true});
 
 // Middlewares setup
 app.use(morgan('combined'));
