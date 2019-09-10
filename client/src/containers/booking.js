@@ -4,7 +4,6 @@ import {connect} from "react-redux"
 import {GoogleComponent} from "react-google-location";
 import Confirmation from './../components/Confirmation'
 import { fetchUser } from "../actions";
-import env from '../app_env'
 import waiter from "./../images/waiter.png"
 import pet from "./../images/pet.png"
 import cleaning from "./../images/cleaning.png"
@@ -15,7 +14,7 @@ import dishwasher from "./../images/dishwasher.png"
 import babysitting from "./../images/babysitting.png"
 import moving from "./../images/moving.png"
 import uuid from "uuid"
-const API_KEY = env.GOOGLE_API_KEY // how to get key - step are below
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY // how to get key - step are below
 
 
 class Booking extends Component {

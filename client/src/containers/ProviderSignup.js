@@ -5,12 +5,8 @@ import { connect } from 'react-redux';
 import { signup } from "../actions";
 import validator from 'validator';
 import { GoogleComponent } from 'react-google-location'
-import env from '../app_env'
 
-
-
-
-const API_KEY = env.GOOGLE_API_KEY // how to get key - step are below
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY // how to get key - step are below
 
 class ProviderSignup extends Component {
   constructor(props) {
