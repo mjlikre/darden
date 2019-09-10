@@ -13,7 +13,7 @@
     "heroku-postbuild": "npm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "XinSen Jiang",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
