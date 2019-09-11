@@ -5,7 +5,7 @@ import { fetchUser } from "../actions";
 import { connect } from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 import images1 from "../images/img1.png";
-import logo1 from "../images/logo.png";
+import logo1 from "../images/anotherLogo.png";
 // import Booking from "../containers/booking"
 
 

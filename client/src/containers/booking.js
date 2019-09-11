@@ -42,12 +42,9 @@ class Booking extends Component {
         this.props.fetchUser()
     }
     imgWidth = {
-        height: "174.66px"
+        height: "210.66px"
     }
-    imgHeight = {
-        height: "230px",
-        width: "230px"
-    }
+
     topImg = {
         width: '174.66px'
     }
@@ -62,9 +59,10 @@ class Booking extends Component {
             return(
                 <div>
                     <div className='card' >
-                        <img style={this.imgHeight} className='card-img-top' src={this.state.service.img} alt=""/>
-                        <h4>{this.state.service.skillName}</h4>
+                        <img className='card-img-top' src={this.state.service.img} alt=""/>
+
                     </div>
+                    <h4>{this.state.service.skillName}</h4>
                     <br/>
                     <br/>
                     <br/>
@@ -188,7 +186,7 @@ class Booking extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className='col-md-4 container'>
+                        <div className='col-md-3 container'>
                             <br/>
                             <br/>
                             <br/>

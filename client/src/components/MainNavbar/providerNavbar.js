@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import { Link } from "react-router-dom";
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import {Link} from "react-router-dom";
 
 class providerNavbar extends Component  {
     constructor(props) {
@@ -76,7 +77,10 @@ class providerNavbar extends Component  {
                                         <NavLink href="">Payment</NavLink>
                                     </NavItem>
                                     <NavItem>
-                                        <NavLink href="/signout/">Signout</NavLink>
+                                        <Link className="nav-link naturalWHite" to="/signout">
+                                            <i className="fa fa-id-badge" /><button className='btn btn-danger'>
+                                            Logout</button>
+                                        </Link>
                                     </NavItem>
 
                                 </Nav>
