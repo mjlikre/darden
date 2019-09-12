@@ -9,7 +9,8 @@ import {
     ADMIN_APPROVE_ERROR,
     ADMIN_REJECT,
     ADMIN_REJECT_ERROR,
-    ADMIN_RESTART, ADMIN_RESTART_ERROR, ADMIN, ADMIN_ERROR
+    ADMIN,
+    ADMIN_ERROR
 } from "../actions/types";
 
 const initial = {
@@ -69,10 +70,6 @@ export default function (state = initial, action) {
         case ADMIN_REJECT:
             return{...state, adminReject: action.payload};
         case ADMIN_REJECT_ERROR:
-            return{...state, adminRejectError:  action.payload};
-        case ADMIN_RESTART:
-            return{...state, adminReject: action.payload};
-        case ADMIN_RESTART_ERROR:
             return{...state, adminRejectError:  action.payload};
         default :
             return state;
