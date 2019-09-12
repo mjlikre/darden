@@ -10,10 +10,16 @@ module.exports = {
         try {
             const user = await db.ApprovedUserProfile.findOne({"phone": data.number})
             console.log(user.id)
+            if (!user){
+                twiml.message("Opps! Seems like you're not an Approved service provider yet, schedule an appointment to get approved or sign up to become a service provider!");
+            }
 
             const userData = user.data
             console.log(userData)
             const checkBookingData = await db.Bookings.find({"bookingId": data.message})
+            if(!checkBookingData) {
+                twiml.message("Seems like you failed to respond in the correct format, make sure to respond with a 'yes' plus the booking number, separated by a space, like this: 'YES (booking number)");
+            }
             if (checkBookingData.confirm === 0){
                 const changeBookingData = await db.Bookings.updateOne({"bookingId": data.message}, {$set: {"providerId": user.id, "confirm": 1}})
                 console.log(changeBookingData)

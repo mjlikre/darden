@@ -36,7 +36,7 @@ class Index extends Component {
     currentJob = []
     currentSkill = []
     height = {
-        height: "174.66px"
+        height: "210px"
     }
     mySkills=(e)=>{
         if(this.currentJob.length < 3 ){
@@ -50,7 +50,6 @@ class Index extends Component {
         console.log(this.state)
     }
     displayMySkills (){
-        console.log({cleaning, waiter, dishwasher, laundry, babysitting, pet, personalTrainer, moving, mental})
         return this.state.currentJob.map(job=>{
             return(
                 <div className='col-md-4 container'>
@@ -64,8 +63,10 @@ class Index extends Component {
     }
     updateSkills(e){
         for (let i = 0; i <= this.currentJob.length; i ++){
+
             if (this.currentJob[i]===e.job){
                 this.currentJob.splice(i, 1)
+                this.currentSkill.splice(i, 1)
                 this.setState({currentJob : this.currentJob})
             }
         }
@@ -102,7 +103,7 @@ class Index extends Component {
             width: '450px'
         }
         const height = {
-            height: "174.66px"
+            height: "210px"
         }
         if(this.state.skills=== 0 && this.state.agreement === 0 && this.state.status === 0){
             return (
@@ -143,7 +144,7 @@ class Index extends Component {
                                     </div>
                                     <div className='col-md-4 container'>
                                         <div className='card' onClick={()=>{this.mySkills({skillName: "Baby Sitting", img: "/static/media/babysitting.ffb982a2.png"})}}>
-                                            <img className='card-img-top' src={babysitting} alt=""/>
+                                            <img style={height} className='card-img-top' src={babysitting} alt=""/>
                                         </div>
                                         <h4>Baby Sitting</h4>
                                     </div>

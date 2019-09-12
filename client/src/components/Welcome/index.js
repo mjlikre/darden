@@ -68,7 +68,7 @@ class Welcome extends Component {
 
                             <img className="card-img-top" src={images2} alt = ''/>
                             <div className="card-body">
-                                <Link to='/signup'><button className="btn btn-primary"><h2 className="text-center">Provide Services</h2></button></Link>
+                                <Link to='/hub'><button className="btn btn-primary"><h2 className="text-center">Provide Services</h2></button></Link>
                             </div>
                         </div>
                         <div className='col-md-4'>

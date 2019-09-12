@@ -10,8 +10,6 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-console.log(process.env.secret)
-
 // Database setupx
 mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost:auth/auth', { useNewUrlParser: true, useCreateIndex: true});
 
