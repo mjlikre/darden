@@ -14,10 +14,14 @@ module.exports = {
             await booking.save();
             // const firstMatch = await db.ApprovedUserProfile.find({'lat' : place.coordinates.lat, 'lng' : place.coordinates.lng}) //need to figure out how to match with people within 0.0050 longitude and latitude,
             // let matched = []
-            const firstMatch = await db.ApprovedUserProfile.find() //need to figure out how to match with people within 0.0050 longitude and latitude,
+            const firstMatch = await db.ApprovedUserProfile.find() //This is a problem here, even though i found out how many people are there who is around, but i did it by simply finding
+            //everyone, i need a better way to find people
             let matched = []
             firstMatch.map(matches=>{
-                if (parseFloat(matches.lat) > (parseFloat(place.coordinates.lat) - 0.005) && parseFloat(matches.lat) < (parseFloat(place.coordinates.lat) + 0.005) && parseFloat(matches.lng) > (parseFloat(place.coordinates.lng) - 0.005) && (parseFloat(matches.lng) < parseFloat(place.coordinates.lng) + 0.005)){
+                if (parseFloat(matches.lat) > (parseFloat(place.coordinates.lat) - 0.005)
+                    && parseFloat(matches.lat) < (parseFloat(place.coordinates.lat) + 0.005)
+                    && parseFloat(matches.lng) > (parseFloat(place.coordinates.lng) - 0.005)
+                    && (parseFloat(matches.lng) < parseFloat(place.coordinates.lng) + 0.005)){
                     matched.push(matches)
 
                 }
