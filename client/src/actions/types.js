@@ -25,6 +25,8 @@ export const PAYMENT = "PAYMENT";
 export const PAYMENT_ERROR = "PAYMENT_ERROR";
 export const BOOKING = "BOOKING";
 export const BOOKING_ERROR = "BOOKING_ERROR";
+export const GET_BOOKING = "GET_BOOKING";
+export const GET_BOOKING_ERROR = "GET_BOOKING_ERROR"
 
 
 

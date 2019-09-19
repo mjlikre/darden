@@ -8,7 +8,6 @@ const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID_KEY, process.env
 
 module.exports = {
     booking: async (req, res) =>{
-        console.log('hey')
         const {service, place, date, hour, name, email, phone, clientId, providerId, price, darden, tax, total, description, confirm, bookingId } = req.body
         try{
             const booking = new db.Bookings({service, place, date, hour, name, email, phone, clientId, providerId, price, darden, tax, total, description, confirm, bookingId })
@@ -33,7 +32,6 @@ module.exports = {
                     }
                 })
             })
-
             await matched.map(user=>{
                 client.messages
                     .create({
@@ -46,10 +44,58 @@ module.exports = {
             await res.json('success')
         }catch(e){
             res.status(404).json(e)
+        }
+    },
+    seekerBookings: async (req, res)=>{
 
+        try {
+            const myOrders = await db.Bookings.find({"clientId": req.query.id})
+            let orderedOrders = []
+            myOrders.map(order=>{
+                let eachOrder = {
+                    time: moment(order.date).unix(),
+                    booking: order
+                }
+                orderedOrders.push(eachOrder)
+            })
+            function compareValues(key, order='asc') {
+                return function(a, b) {
+                    if(!a.hasOwnProperty(key) ||
+                        !b.hasOwnProperty(key)) {
+                        return 0;
+                    }
+
+                    const varA = (typeof a[key] === 'string') ?
+                        a[key].toUpperCase() : a[key];
+                    const varB = (typeof b[key] === 'string') ?
+                        b[key].toUpperCase() : b[key];
+
+                    let comparison = 0;
+                    if (varA > varB) {
+                        comparison = 1;
+                    } else if (varA < varB) {
+                        comparison = -1;
+                    }
+                    return (
+                        (order == 'desc') ?
+                            (comparison * -1) : comparison
+                    );
+                };
+            }
+            orderedOrders.sort(compareValues("time", "desc"))
+
+            await res.json(orderedOrders)
+        }catch(e){
+            await res.json(e)
         }
 
-
-
+    },
+    providerBookings: async (req ,res) =>{
+        try {
+            const myOrders = await db.Bookings.find({"providerId": req.query.id})
+            await res.json(myOrders)
+        }catch(e){
+            await res.json(e)
+        }
     }
 }

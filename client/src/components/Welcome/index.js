@@ -25,7 +25,6 @@ class Welcome extends Component {
     handleSubmit(e) {
         e.preventDefault()
         const data = {...this.state}
-        console.log(data)
         this.props.signin(data, () => {
             this.props.fetchUser();
             this.props.history.push("/dashboard");

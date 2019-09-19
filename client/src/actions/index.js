@@ -22,11 +22,11 @@ import {
   PAYMENT,
   PAYMENT_ERROR,
   BOOKING,
-  BOOKING_ERROR
+  BOOKING_ERROR,
+  GET_BOOKING,
+  GET_BOOKING_ERROR
 } from "./types";
 import axios from 'axios';
-
-
 
 export const signup = (formProps, callback) => async dispatch => {
   try {
@@ -150,6 +150,24 @@ export const booking = data => async dispatch =>{
     dispatch({ type: BOOKING, payload: bookingForm.data})
   }catch(e){
     dispatch({ type: BOOKING_ERROR, payload: "something went wrong fam"})
+  }
+}
+
+export const getSeekerBooking = data => async dispatch =>{
+  try{
+    const myBookings = await axios.get('api/data/seekerbookings', {params:{id: data}})
+    dispatch({ type: GET_BOOKING, payload: myBookings})
+  }catch(e){
+    dispatch({ type: GET_BOOKING_ERROR, payload: e})
+  }
+}
+
+export const getProviderBooking = data => async dispatch =>{
+  try{
+    const myBookings = await axios.get('api/data/providerbookings', {params:{id: data.id}})
+    dispatch({ type: GET_BOOKING, payload: myBookings})
+  }catch(e){
+    dispatch({ type: GET_BOOKING_ERROR, payload: e})
   }
 }
 

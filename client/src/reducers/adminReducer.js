@@ -52,7 +52,6 @@ export default function (state = initial, action) {
                 userProfilesZero: action.payload[3],
 
             };
-
         case FETCH_USER_PROFILE_ERROR:
             return {...state, error: action.payload};
         case CHANGE_STATUS_ONE:
