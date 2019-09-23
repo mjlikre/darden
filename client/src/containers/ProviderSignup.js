@@ -4,18 +4,20 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { signup } from "../actions";
 import validator from 'validator';
+import { Redirect } from "react-router-dom";
 import { GoogleComponent } from 'react-google-location'
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY // how to get key - step are below
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY
 
 class ProviderSignup extends Component {
   constructor(props) {
     super(props)
     this.state = {
       place: null,
+      signedUp: 0
     };
   }
   renderErrors = ({ error, touched }) => {
@@ -48,13 +50,15 @@ class ProviderSignup extends Component {
     this.props.signup(data, () => {
       this.props.history.push('/hub');
     });
+
   }
 
 
   render() {
+    const { handleSubmit } = this.props;
 
-      const { handleSubmit } = this.props;
-      return (
+    if (this.state.signedUp === 0){
+        return (
 
           <div className="container">
             <div className='row'>
@@ -115,12 +119,27 @@ class ProviderSignup extends Component {
 
                   <button className="btn btn-primary">Signup</button>
                 </form>
+                {this.props.errorMessage}
               </div>
             </div>
-
-
           </div>
+        )
+    }
+    else if(this.state.signedUp===1 && !this.props.errorMessage){
+      console.log(this.props.errorMessage)
+      return(
+        <div>Hey</div>
       )
+      // return(
+      //   <Redirect to={{
+      //     pathname: "/hub",
+      //     state: {
+
+      //     }
+      //   }}/>
+      // )
+    }
+     
   }
 }
 
@@ -193,6 +212,22 @@ export default compose(
 //     )
 //   }
 // }
+/*id: this.props.user._id,
+    firstname: this.props.user.firstname,
+    lastname: this.props.user.lastname,
+    phone: this.props.user.phone,
+    address: this.props.user.place,
+    email: this.props.user.email,
+    lat: this.props.user.lat,
+    lng: this.props.user.lng,
+    skills: this.state.justSkills,
+    agreement: this.state.agreement,
+    status: this.state.status,
+    aboutYou: this.state.aboutYou,
+    date: this.state.date,
 //
 //
 // export default HomeComponent;
+
+
+ */

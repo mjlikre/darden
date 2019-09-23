@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
-import { connect } from "react-redux";
-import DateTimePicker from 'react-datetime-picker';
 import { Redirect } from "react-router-dom";
-import {fetchUser, makeUserProfile} from "../../actions"
-import waiter from "../../images/waiter.png"
-import pet from "../../images/pet.png"
-import cleaning from "../../images/cleaning.png"
-import mental from "../../images/mental.png"
-import laundry from "../../images/laundry.png"
-import personalTrainer from "../../images/personalTrainer.png"
-import dishwasher from "../../images/dishwasher.png"
-import babysitting from "../../images/babysitting.png"
-import moving from "../../images/moving.png"
+
+import cleaning from "../../images/cleaning.png";
+import waiter from "../../images/waiter.png";
+import dishwasher from "../../images/dishwasher.png";
+import laundry from "../../images/laundry.png";
+import babysitting from "../../images/babysitting.png";
+import pet from "../../images/pet.png";
+import moving from "../../images/moving.png";
+import personalTrainer from "../../images/personalTrainer.png";
+import mental from "../../images/mental.png";
 
 class Index extends Component {
     constructor(props) {
@@ -19,26 +17,13 @@ class Index extends Component {
         this.state = {
             currentJob: [],
             aboutYou: '',
-            description: 0,
             skills: 0,
-            status: 0,
-            agreement: 0,
-            date: null,
             justSkills: [],
         };
     }
-    componentDidMount() {
-        this.fetchUser()
-    }
-
-    onChange = date => {
-        this.setState({ date })
-    }
     currentJob = []
     currentSkill = []
-    height = {
-        height: "210px"
-    }
+    
     mySkills=(e)=>{
         if(this.currentJob.length < 3 ){
             this.currentJob.push(e)
@@ -75,21 +60,6 @@ class Index extends Component {
     setSkill(){
         this.setState({skills: 1});
     }
-    setInterview(){
-        this.setState({status: 1})
-    }
-    setAgreement(){
-        this.setState({agreement: 1})
-        const data = {
-                    skills: this.state.justSkills,
-                    agreement: this.state.agreement,
-                    status: this.state.status,
-                    aboutYou: this.state.aboutYou,
-                    date: this.state.date
-                }
-        console.log(data)
-        this.props.makeUserProfile(data)
-    }
     render() {
         const length = {
             width: '450px'
@@ -97,11 +67,11 @@ class Index extends Component {
         const height = {
             height: "210px"
         }
-        if(this.state.skills=== 0 && this.state.agreement === 0 && this.state.status === 0){
+        if (this.state.skills === 0){
             return (
                 <div className='container'>
                     <div className='container'>
-                        <h1>Welcome, {this.props.user.firstname}</h1>
+                        <h1>Welcome</h1>
                         <br/>
                         <h2 className='ml-auto'>Select Your Skills:</h2>
                         <div className='row'>
@@ -186,16 +156,7 @@ class Index extends Component {
                     <br/>
                     <div className='container'>
                         <form action="">
-                            <label >
-                                <h3>Upload an Image Of Yourself</h3>
-                                <input
-                                    type="file"
-                                    className="form-control-file"
-                                    onChange={(e) => { this.setState({profileImg: e.target.value})}}
-                                />
-                            </label>
-                            <br/>
-                            <br/>
+                        
                             <label >
                                 <h3>About You</h3>
                                 <textarea
@@ -211,45 +172,22 @@ class Index extends Component {
                     </div>
                     <button className="btn btn-success" onClick={()=>{this.setSkill()}}>Next</button>
                 </div>
-            );
-        }
-        else if(this.state.skills===1 && this.state.agreement === 0 && this.state.status === 0){
-            return(
-                <div className='container'>
-                    <br/>
-                    <br/>
-                    <h5>Set up an interview!</h5>
-                    <br/>
-                    <br/>
-                    <div className='container'>
-                        <DateTimePicker
-                            onChange={this.onChange}
-                            value={this.state.date}
-                        />
-                    </div>
 
-                    <br/>
-                    <button className="btn btn-success" onClick={()=>{this.setInterview()}}>Next</button>
-                </div>
-            )
-        }
-        else if( this.state.skills=== 1 && this.state.agreement === 0 && this.state.status === 1 ){
+            );
+        }else{
             return(
-                <div className='container'>
-                    <button className="btn btn-success" onClick={()=>{this.setAgreement()}}>Accept Terms and conditions</button>
-                </div>
+              <Redirect to= {{
+                pathname: '/signup',
+                state: {
+                    skills: this.state.justSkills,
+                    aboutYou: this.state.aboutYou   
+                }
+            }}/>  
             )
+            
         }
-        else{
-            return(
-                <Redirect to="/dashboard"/>
-            )
-        }
+        
     }
 }
 
-const mapStateToProps = (state) => ({
-    user: state.fetchUserReducer.user
-})
-
-export default connect(mapStateToProps, {fetchUser, makeUserProfile})(Index);
+export default Index;

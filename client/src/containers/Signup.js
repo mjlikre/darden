@@ -104,10 +104,9 @@ class SeekerSignup extends Component {
 
                             <button className="btn btn-primary">Signup</button>
                         </form>
+                        {this.props.errorMessage}
                     </div>
                 </div>
-
-
             </div>
         )
     }
